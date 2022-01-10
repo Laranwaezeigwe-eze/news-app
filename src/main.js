@@ -1,8 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
+import vuetify from './plugins/vuetify'
+import routes from './routes'
+// import './input.css'
+import VueRouter from "vue-router/dist/vue-router.esm.browser";
+
+
+Vue.use (VueRouter)
+const router = new VueRouter({
+  routes
+})
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  vuetify,
+  router,
+   el: '#app',
+  components: {App},
+  template: '<App/>',
+  render: h => h(App)
+
 }).$mount('#app')
