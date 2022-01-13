@@ -1,4 +1,3 @@
-import Side from "./components/Side.vue";
 import Body from "./components/Body.vue";
 
 const routes=[
@@ -7,10 +6,6 @@ const routes=[
         name: 'body',
         component: Body
     },
-    {
-        path: '/side',
-        name: 'side',
-         component: Side
-    }
+
 ]
 export default routes

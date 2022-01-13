@@ -2,9 +2,10 @@
 <v-layout row wrap >
 
   <v-flex xs12 sm8 offset-md-12>
-    <div v-for="article in articles" :key="article.title">
-      <v-card class="my-3" hover>
-        <v-img height="250px"
+    <v-row>
+    <v-col v-for="article in articles" :key="article.title" class="mt-4 mb-4" flat cols="12" md="4">
+      <v-card class="ms-6" hover >
+        <v-img height="300px"
                v-bind:src="article.image"></v-img>
         <v-container fill-height fluid>
           <v-layout fill-height>
@@ -16,13 +17,10 @@
       </v-card>
       <v-card-text>{{ article.description }}</v-card-text>
       <v-card-actions>
-        <v-chip small color="secondary" class="white--text">
-          {{article.source.name}}
-        </v-chip>
-        <v-spacer></v-spacer>
-      <v-btn v-bind:href="article.url" target="_blank">Read More</v-btn>
+        <v-btn v-bind:href="article.url" target="_blank">Read More</v-btn>
       </v-card-actions>
-    </div>
+    </v-col>
+    </v-row>
   </v-flex>
 </v-layout>
 </template>

@@ -4,6 +4,7 @@ import vuetify from './plugins/vuetify'
 import routes from './routes'
 // import './input.css'
 import VueRouter from "vue-router/dist/vue-router.esm.browser";
+import store from "./store";
 
 
 Vue.use (VueRouter)
@@ -12,10 +13,10 @@ const router = new VueRouter({
 })
 
 Vue.config.productionTip = false
-
 new Vue({
   vuetify,
   router,
+  store,
    el: '#app',
   components: {App},
   template: '<App/>',

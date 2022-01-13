@@ -2,9 +2,10 @@
 <div id="App">
     <v-app>
     <v-app-bar app color="primary" elevation="2">
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title class="white--text">News App</v-app-bar-title>
+      <v-app-bar-nav-icon @click="drawer = !drawer" ></v-app-bar-nav-icon>
+      <v-app-bar-title class="white--text" >News App</v-app-bar-title>
     </v-app-bar>
+
       <v-navigation-drawer v-model="drawer" absolute temporary>
         <v-list nav dense>
           <h2>News Heading</h2>
@@ -17,14 +18,17 @@
         </v-list>
       </v-navigation-drawer>
 
-      <v-content>
-      <v-container >
+
+      <v-main class="mx-5">
+      <v-container class="my-5">
+
         <router-view></router-view>
+        <loader></loader>
         <Body :articles="articles"></Body>
       </v-container>
-    </v-content>
-    <v-footer :fixed="fixed" app>
-      <span>&copy;2021</span>
+    </v-main>
+    <v-footer fixed app>
+      <span>&copy;{{new Date().getFullYear()}}</span>
     </v-footer>
   </v-app>
 </div>
@@ -32,20 +36,23 @@
 <script>
 import axios from 'axios'
 import Body from "./components/Body.vue";
-// import Side from "./components/Side.vue";
+import Loader from './components/loader';
+
 export default {
   name: 'App',
   components: {
     Body,
+    Loader,
 
   },
-  data (){
+    data (){
     return{
       drawer: false,
       api_key: '70fe4e21350675b8593402274a99d8ce',
       articles: [],
+      loader:true,
       items: [
-        {topic: 'breaking-news'},
+        {topic: 'breaking news'},
         {topic: 'health'},
         {topic: 'sports'},
         {topic: 'business'},
@@ -60,6 +67,23 @@ export default {
     }
   },
   created(){
+    axios.interceptors.request.use((config)=> {
+      this.$store.commit('LOADER',true);
+    return config;
+  },  (error)=> {
+      this.$store.commit('LOADER',false);
+    return Promise.reject(error);
+  });
+
+
+    axios.interceptors.response.use((response)=> {
+      console.log(response);
+      this.$store.commit('LOADER',false);
+      return response;
+    }, (error)=> {
+            return Promise.reject(error);
+    });
+
     axios.get('https://gnews.io/api/v4/top-headlines?topic&lang=en&max=8&token=70fe4e21350675b8593402274a99d8ce')
     .then(response =>{
       this.articles = response.data.articles
