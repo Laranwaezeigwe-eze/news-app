@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
 import routes from './routes'
-// import './input.css'
+// import './assets/input.css'
 import VueRouter from "vue-router/dist/vue-router.esm.browser";
 import store from "./store";
 

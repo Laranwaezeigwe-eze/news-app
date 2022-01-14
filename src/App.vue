@@ -1,12 +1,12 @@
 <template>
 <div id="App">
     <v-app>
-    <v-app-bar app color="primary" elevation="2">
+    <v-app-bar app color="blue" elevation="2">
       <v-app-bar-nav-icon @click="drawer = !drawer" ></v-app-bar-nav-icon>
       <v-app-bar-title class="white--text" >News App</v-app-bar-title>
     </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-navigation-drawer  v-model="drawer" app fixed left temporary>
         <v-list nav dense>
           <h2>News Heading</h2>
             <v-divider></v-divider>
@@ -19,9 +19,8 @@
       </v-navigation-drawer>
 
 
-      <v-main class="mx-5">
-      <v-container class="my-5">
-
+      <v-main>
+      <v-container class="">
         <router-view></router-view>
         <loader></loader>
         <Body :articles="articles"></Body>
@@ -45,6 +44,7 @@ export default {
     Loader,
 
   },
+
     data (){
     return{
       drawer: false,
